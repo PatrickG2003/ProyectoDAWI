@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alvarado S.A.C</title>
+    <link rel="shortcut icon" href="../img/LogoA.jpg">
+<style>
+
+
+</style>
+
+</head>
+<body>
+<div th:fragment="cabecera">
+	
+    <div id="bigcontaniner">
+        <header>
+            <nav class="Menu">
+                <div>
+                    <ul id="btn">
+                        <img src="../img/AlvaradoSACLogo.png" alt="">
+                        <li class="nav-item" >
+						  <a class="nav-link" 
+						  	href="/sesion/principal">Principal</a>
+						</li>
+                        <li class="nav-item" th:each="row:${session.ENLACES}">
+						  <a class="nav-link" 
+						  	th:text="${row.descripcion}"
+						  	th:href="${row.ruta}"></a>
+						</li>
+                     		
+                     <li><a th:text="${DATOSDELUSUARIO}"></a></li>
+                     <li>
+						 <form th:action="@{/logout}" method="post">
+							 
+							 <button class="dropdown" type="submit">Cerrar Sesion</button>
+						 </form>
+
+                    </ul>
+                </div>
+            </nav>
+        </header>
+    </div>
+<div>
+    
+</body>
+</html>
