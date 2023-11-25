@@ -31,11 +31,11 @@
 						  	th:href="${row.ruta}"></a>
 						</li>
                      		
-                     <li><a th:text="${DATOSDELUSUARIO}"></a></li>
+                     <li><i class="fas fa-user"></i><a th:text="${DATOSDELUSUARIO}"></a></li>
                      <li>
 						 <form th:action="@{/logout}" method="post">
 							 
-							 <button class="dropdown" type="submit">Cerrar Sesion</button>
+							 <button class="dropdown" type="submit"><i class="fas fa-sign-out"></i>Cerrar Sesion</button>
 						 </form>
 
                     </ul>

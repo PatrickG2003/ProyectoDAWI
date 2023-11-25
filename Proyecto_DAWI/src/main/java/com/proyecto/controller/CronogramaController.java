@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
 import com.proyecto.dto.Detalle;
 import com.proyecto.entity.Cronograma;
 import com.proyecto.entity.Inspecciones;
@@ -20,6 +19,8 @@ import com.proyecto.entity.InspeccionesCronograma;
 import com.proyecto.entity.Solicitud;
 import com.proyecto.service.CronogramaService;
 import com.proyecto.service.InspeccionesService;
+import com.proyecto.service.SolicitudService;
+import com.proyecto.service.UsuarioService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -31,10 +32,16 @@ public class CronogramaController {
 	private InspeccionesService servicioInspecciones;
 	@Autowired
 	private CronogramaService servicioCronograma;
+	@Autowired
+	private SolicitudService servicioSolicitud;
+	@Autowired
+	private UsuarioService servicioUsuario;
 	
 	@RequestMapping("/registrar")
 	public String lista(Model model ){
 		model.addAttribute("inspecciones",servicioInspecciones.listarTodos());
+		model.addAttribute("usuarios",servicioUsuario.listarUsuarioVecino());
+
 		return "registro-cronograma";
 	}
 	
@@ -72,7 +79,7 @@ public class CronogramaController {
 	}
 	
 	@RequestMapping("/grabar")
-	public String grabar(@RequestParam("inicio") String ini,@RequestParam("fin") String fin,@RequestParam("rendimiento") String ren,
+	public String grabar(@RequestParam("solicitud") int soli,@RequestParam("inicio") String ini,@RequestParam("fin") String fin,@RequestParam("rendimiento") String ren,
 						HttpServletRequest request,RedirectAttributes redirect){
 		try {
 			//crear objeto de la entidad Requerimiento
@@ -82,7 +89,7 @@ public class CronogramaController {
 			bean.setRendimiento(ren);
 			Solicitud sol=new Solicitud();
 			
-			sol.setCodigo(1);
+			sol.setCodigo(soli);
 			bean.setSolicitud(sol);
 			
 			List<Detalle> lista=(List<Detalle>) request.getSession().getAttribute("datos");
@@ -112,6 +119,13 @@ public class CronogramaController {
 		}
 		return "redirect:/cronograma/registrar";
 	}
+	
+	@RequestMapping("/consultaSolicitud")
+	@ResponseBody
+	public List<Solicitud>consultaSolicitud(@RequestParam("codigo") int cod){
+		return servicioSolicitud.listarSolicitudporUsuario(cod);
+	}
+	
 	
 }
 

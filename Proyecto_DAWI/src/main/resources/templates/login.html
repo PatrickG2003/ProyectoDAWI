@@ -4,6 +4,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Intranet</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+ 
+
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"
+></script>
+ 
  <style>
 body{
   background-image:url('https://whatatrip.pe/wp-content/uploads/2023/06/miraflores-view.png');
@@ -163,6 +170,68 @@ body{
 </head>
 <body>
 
+<section>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">    
+    <div class="modal-dialog">
+		
+        <div class="modal-content ">
+        <div class="modal-header">
+            <h5 class="modal-title">Registro de Usuarios</h5>
+            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+			
+		<form th:action="@{registrarVecino}" method="POST">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="col-12">
+                  <label for="nombre" class="col-form-label">Nombre:</label>
+                  <input type="text" class="form-control" name="nombre" />
+              </div>
+              
+              <div class="col-12">
+                  <label for="dni"C class="col-form-label">DNI:</label>
+                  <input type="text" class="form-control" name="dni" />
+              </div>
+              <div class="col-12">
+                  <label for="correo" class="col-form-label">Correo:</label>
+                  <input type="text" class="form-control" name="correo" />
+              </div>
+              <div class="col-12">
+                  <label for="password" class="col-form-label">Contraseña:</label>
+                  <input type="password" class="form-control" name="password" />
+              </div>
+                            
+              
+            </div>
+            <div class="col-md-6">
+              <div class="col-12">
+                <label for="apellido" class="col-form-label">Apellidos:</label>
+                <input type="text" class="form-control" name="apellido" />
+               </div> 
+             <div class="col-12">
+              <label for="telefono" class="col-form-label">Celular:</label>
+              <input type="text" class="form-control" name="celular" />
+              </div>
+             <div class="col-12">
+            <label for="usuario" class="col-form-label">Nombre de Usuario:</label>
+            <input type="text" class="form-control" name="usuario" />
+              </div>
+           
+   						<input type="submit" class="btn btn-primary" value="Registrar"/>
+
+            </div>
+                            
+                </form>
+            
+            </div>
+    
+    
+    </div>
+
+
+</section>
+
 
 	<div class="image-top">
 		<img src="https://digital.miraflores.gob.pe:8443/miraflores/librerias/extranet/images/miraflores-en-tu-corazon.png" >
@@ -174,17 +243,11 @@ body{
         <div class="textcontent">
           <p class="title">Tienes una cuenta ?</p>
           <p>Registrate aquí</p>
-          <button id="switch1">Registrarse</button>
+          <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal" id="switch1">Registrarse</button>
+          
         </div>
       </div>
-      <div class="signupMsg visibility">
-        <div class="textcontent">
-          <p class="title">Have an account?</p>
-          <p>Log in to see all your collection.</p>
-          <button id="switch2">LOG IN</button>
-        </div>
-      </div>
-    </div>
+     
 
 
 
@@ -205,20 +268,18 @@ body{
      
     </div>
 
-      <div class="signup hide">
-        <h2>SIGN UP</h2>
-        <div class="inputbox">
-          <input type="text" name="fullname" placeholder="  FULLNAME">
-          <input type="text" name="email" placeholder="  EMAIL">
-          <input type="password" name="password" placeholder="  PASSWORD">
-        </div>
-        <button>SIGN UP</button>
-      </div>
-
+     
     </div>
   </div>
+  
+  
+  
+  
+  
+  
+  
+  
 </body>
 </html>
 
 
-</html>

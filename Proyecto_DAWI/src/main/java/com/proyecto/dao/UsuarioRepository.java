@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.proyecto.entity.Enlace;
+import com.proyecto.entity.Solicitud;
 import com.proyecto.entity.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
@@ -22,5 +23,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 		@Query("select e from RolEnlace re join re.enlace e where re.rol.descripcion=?1")
 		public List<Enlace> traerEnlacesDelUsuario(String desRol);
 		
-		
+		@Query("select u from Usuario u where u.rol.codigo=1")
+		public List<Usuario> listarUsuariosPorRolVecino();
 }

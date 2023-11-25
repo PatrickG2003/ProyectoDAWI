@@ -9,6 +9,6 @@ import com.proyecto.entity.Solicitud;
 
 public interface SolicitudRepository extends JpaRepository<Solicitud, Integer>{
 	
-	@Query("select s from Solicitud s where s.usuario.codigo=?1")
+	@Query("select s from Solicitud s where s.usuario.codigo=?1 and s.estado='Activo' ")
 	public List<Solicitud> listarSolicitudporUsuario(int codTipo);
 }

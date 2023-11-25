@@ -22,4 +22,23 @@ public class UsuarioService {
 	public List<Enlace> enlacesDelUsuario(String desRol){
 		return repo.traerEnlacesDelUsuario(desRol);
 	}
+	
+	public void registrar(Usuario m) {
+		repo.save(m);
+	}
+	public void actualizar(Usuario m) {
+		repo.save(m);
+	}
+	public void eliminar(Integer cod) {
+		repo.deleteById(cod);
+	}
+	public Usuario buscarPorID(Integer cod) {
+		return repo.findById(cod).orElse(null);
+	}
+	public List<Usuario> listarTodos(){
+		return repo.findAll();
+	}
+	public List<Usuario> listarUsuarioVecino(){
+		return repo.listarUsuariosPorRolVecino();
+	}
 }

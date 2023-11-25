@@ -12,11 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.proyecto.security.UsuarioDetailsService;
 
-
-
-//clase de configuración para Spring Security
 @Configuration
-//habilitar seguridad
 @EnableWebSecurity
 public class SecurityConfig {
 	
@@ -32,7 +28,7 @@ public class SecurityConfig {
 		http
 		.authorizeHttpRequests((requests) -> requests
 			.requestMatchers("/sesion/**","resources/**").permitAll()
-			.requestMatchers("/solicitud/**","/requerimiento/**","/cronograma/**").authenticated()
+			.requestMatchers("/solicitud/**","/sesion/**","/cronograma/**").authenticated()
 		)
 		.formLogin((form) -> form
 			.loginPage("/sesion/login").defaultSuccessUrl("/sesion/principal")
@@ -50,9 +46,7 @@ public class SecurityConfig {
 	}
 	@Bean
 	public AuthenticationProvider authenticationProvider() {
-		//crear objeto de DaoAuthenticationProvider
 		DaoAuthenticationProvider dao=new DaoAuthenticationProvider();
-		//setear
 		dao.setUserDetailsService(userDetailsService());
 		dao.setPasswordEncoder(encriptar());
 		return dao;
