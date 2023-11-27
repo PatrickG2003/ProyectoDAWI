@@ -112,7 +112,7 @@ public class CronogramaController {
 			//
 			lista.clear();
 			request.getSession().setAttribute("datos",lista);
-			redirect.addFlashAttribute("MENSAJE","Requerimiento registrado");
+			redirect.addFlashAttribute("MENSAJE","Cronograma registrado");
 		} catch (Exception e) {
 			redirect.addFlashAttribute("MENSAJE","Error en el registro");
 			e.printStackTrace();
