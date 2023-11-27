@@ -1,41 +1,47 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alvarado S.A.C</title>
-    <link rel="shortcut icon" href="../img/LogoA.jpg">
-<style>
 
+    <!-- Font Awesome -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
 
-</style>
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css"
+  rel="stylesheet"
+/>
 
 </head>
 <body>
-<div th:fragment="cabecera">
+<div th:fragment="cabecera" >
 	
-    <div id="bigcontaniner">
+    <div id="bigcontaniner" style="background-color:#1976D2" >
         <header>
-            <nav class="Menu">
-                <div>
+            <nav data-mdb-navbar-init class="navbar navbar-light bg-body-tertiary">
+                <div style="height: auto;">
                     <ul id="btn">
-                        <img src="../img/AlvaradoSACLogo.png" alt="">
-                        <li class="nav-item" >
+                        <img src="https://www.infoartes.pe/wp-content/uploads/2014/07/mirafloresentucorazon.jpg" style="width: 112.5px; height: 142.4px;" alt="">
+                        <li class="nav-item d-flex align-items-center justify-content-center" >
 						  <a class="nav-link" 
 						  	href="/sesion/principal">Principal</a>
 						</li>
-                        <li class="nav-item" th:each="row:${session.ENLACES}">
+                        <li class="nav-item d-flex align-items-center justify-content-center" th:each="row:${session.ENLACES}">
 						  <a class="nav-link" 
 						  	th:text="${row.descripcion}"
 						  	th:href="${row.ruta}"></a>
 						</li>
                      		
-                     <li><i class="fas fa-user"></i><a th:text="${DATOSDELUSUARIO}"></a></li>
-                     <li>
+                     <li class="d-flex align-items-center justify-content-center">
+						 <i class="fas fa-user"></i><a th:text="${DATOSDELUSUARIO}"></a>
+						 </li>
+                     <li class="d-flex align-items-center justify-content-center">
 						 <form th:action="@{/logout}" method="post">
+							 <button class="btn btn-danger"type="submit"><i class="fas fa-sign-out" style="margin-right: 10px;"></i>Cerrar Sesion</button>
 							 
-							 <button class="dropdown" type="submit"><i class="fas fa-sign-out"></i>Cerrar Sesion</button>
 						 </form>
 
                     </ul>
@@ -45,5 +51,3 @@
     </div>
 <div>
     
-</body>
-</html>

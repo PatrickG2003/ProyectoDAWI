@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -99,6 +100,7 @@ public class UsuarioController {
 	
 	@RequestMapping("/registrarUsuario")
 	public String registrarUsuario(
+						 @RequestParam("codigo") int cod,
 						 @RequestParam("nombre") String nom,
 						 @RequestParam("apellido") String ape,
 						 @RequestParam("dni") String dni,
@@ -125,10 +127,22 @@ public class UsuarioController {
 			Rol rol=new Rol();
 			rol.setCodigo(idrol);
 			usuario.setRol(rol);
-		
-			servicioUsu.registrar(usuario);
+
+			if(cod==0) {
+				//invocar al método registrar
+				servicioUsu.registrar(usuario);
+				//mensaje +
+				redirect.addFlashAttribute("MENSAJE","Usuario registrado");
+			}
+			else {
+				//setear atributo codigo
+				usuario.setCodigo(cod);
+				servicioUsu.actualizar(usuario);
+				//mensaje +
+				redirect.addFlashAttribute("MENSAJE","Usuario actualizado");
+			}
+
 			
-			redirect.addFlashAttribute("MENSAJE","Usuario registrado");
 			
 			
 		} catch (Exception e) {
@@ -146,7 +160,11 @@ public class UsuarioController {
 		
 		return "mantenimiento-usuario";
 	}
-	
+	@RequestMapping("/consultaPorId")
+	@ResponseBody
+	public Usuario consultaPorID(@RequestParam("codigo") Integer cod){
+		return servicioUsu.buscarPorID(cod);
+	}
 	
 }
 

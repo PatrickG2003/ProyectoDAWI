@@ -79,11 +79,13 @@
   type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"
 ></script>
-<body>
-   	<div th:replace="~{nav :: cabecera}"></div>
+<div th:replace="~{nav :: cabecera}"></div>
+
+<body  class="">
+   	
 
     <div class="col-auto text-center p-md-5">
-        <h1>REGISTRO DE SOLICITUD DE REQUERIMIENTOS VECINALES</h1>
+        <h1><strong>REGISTRO DE SOLICITUD DE REQUERIMIENTOS VECINALES</strong></h1>
     </div>
     <div class="container">
 		<form th:action="@{grabar}" method="POST">
@@ -91,13 +93,13 @@
             <div class="row mb-4">
               <div class="col">
                 <div>
-                    <label class="form-label" for="">Razon</label>
+                    <label class="form-label" for=""><strong> Razon</strong></label>
                   <input type="text" id="" class="form-control" name="razon" />
                    </div>
               </div>
               <div class="col">
                 <div>
-                  <label class="form-label" for="">Lugar de los hechos</label>
+                  <label class="form-label" for=""><strong>Lugar de los hechos</strong></label>
                   <input type="textbox" id="" class="form-control" name="lugar" />
                 </div>
               </div>
@@ -106,14 +108,14 @@
             <div class="row mb-4">
                 <div class="col">
                   <div>
-                      <label class="form-label" for="">Descripcion del problema</label>
+                      <label class="form-label" for=""><strong>Descripcion del problema</strong></label>
                       <br>
                       <textarea class="form-control" id="" rows="6" name="descripcion"></textarea>
                      </div>
                 </div>
                 <div class="col">
                   <div>
-                    <label class="form-label" for="">Propuesta de Solucion</label>
+                    <label class="form-label" for=""><strong>Propuesta de Solucion</strong></label>
                     <textarea class="form-control" id="" rows="6" name="posolucion"></textarea>
                   </div>
                 </div>
@@ -123,13 +125,13 @@
               <div class="row mb-4">
                 <div class="col">
                   <div>
-                      <label class="form-label" for="">Recurrencia</label>
+                      <label class="form-label" for=""><strong>Recurrencia</strong></label>
                       <textarea class="form-control" id="" rows="3" name="recurrencia"></textarea>
                      </div>
                 </div>
                 <div class="col">
                   <div>
-                    <label class="form-label" for="">Recomendaciones</label>
+                    <label class="form-label" for=""><strong>Recomendaciones</strong></label>
                     <textarea class="form-control" id="" rows="3" name="recomendacion"></textarea>
                   </div>
                 </div>
@@ -141,6 +143,11 @@
            <div class="text-center"> 
             <input type="submit" class="btn btn-primary" value="Registrar"/>
             <a href="./solicitudes-main.html" class="btn btn-danger">CANCELAR</a>
+            
+          <br>
+          <br>
+          <br>
+          <br>
         </div>
 
           </form>

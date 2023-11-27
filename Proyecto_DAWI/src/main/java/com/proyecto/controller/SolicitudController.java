@@ -1,11 +1,14 @@
 package com.proyecto.controller;
 
 
+import java.io.File;
+import java.io.OutputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,6 +19,13 @@ import com.proyecto.entity.Usuario;
 import com.proyecto.service.SolicitudService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Controller
 @RequestMapping("/solicitud")
@@ -56,13 +66,13 @@ public class SolicitudController {
 
 			servicioSol.registrar(sol);
 			
-			redirect.addFlashAttribute("MENSAJE","Medicamento registrado");
+			redirect.addFlashAttribute("MENSAJE","Solicitud registrada");
 			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/solicitud/registrar";
+		return "redirect:/solicitud/consultaPorUsuario";
 	}
 	
 	
@@ -85,6 +95,21 @@ public class SolicitudController {
 		return "listar-solicitudes";
 	}
 	
-	
+	@RequestMapping("/reporteSolicitudes")
+	public void medicamentos(HttpServletResponse response) {
+		try {
+			List<Solicitud> lista=servicioSol.listarTodos();
+			File file=ResourceUtils.getFile("classpath:listadesolicitudes.jrxml");
+			JasperReport jasper=JasperCompileManager.compileReport(file.getAbsolutePath());
+			JRBeanCollectionDataSource origen=new JRBeanCollectionDataSource(lista);
+			JasperPrint jasperPrint=JasperFillManager.fillReport(jasper,null,origen);
+			response.setContentType("application/pdf");
+			
+			OutputStream salida=response.getOutputStream();
+			JasperExportManager.exportReportToPdfStream(jasperPrint,salida);		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 }
